@@ -1,0 +1,18 @@
+FROM library/alt:sisyphus
+RUN apt-get update \
+    && apt-get dist-upgrade -y \
+    && apt-get install -y glibc-locales su sudo apt-repo systemd chrony \
+        docker-ce \
+    && apt-get install -y systemd-sysvinit \
+    && apt-get clean \
+    && find /var/lib/apt/lists/ -type f -exec rm "{}" \; \
+    && rm -rf /var/cache/apt/*.bin \
+    && apt-repo rm all \
+    && apt-repo add \
+        'rpm [alt] http://mirror.yandex.ru/altlinux Sisyphus/x86_64 classic' \
+    && apt-repo add \
+        'rpm [alt] http://mirror.yandex.ru/altlinux Sisyphus/noarch classic' \
+    && control sudo public \
+    && systemctl enable chronyd
+VOLUME ["/run", "/var/run"]
+ENTRYPOINT [ "/sbin/init" ]
