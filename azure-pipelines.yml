@@ -1,0 +1,34 @@
+schedules:
+- cron: "0 23 * * 0"
+  displayName: Weekly build
+  branches:
+    include:
+    - sisyphus
+  always: true
+
+trigger:
+- sisyphus
+
+jobs:
+- job: Create
+  strategy:
+    matrix:
+      Build_Image:
+        TARGET: 'build'
+      Tests_Image:
+        TARGET: 'tests'
+  steps:
+  - task: Docker@2
+    displayName: Login to Docker Hub
+    inputs:
+      command: login
+      containerRegistry: dockerRegistryServiceConnection1
+  - task: Docker@2
+    displayName: Build and Push
+    inputs:
+      command: buildAndPush
+      repository: stanislavlevin/freeipa-$(TARGET)-altlinux
+      Dockerfile:
+        Dockerfile.$(TARGET)
+      tags:
+        sisyphus
