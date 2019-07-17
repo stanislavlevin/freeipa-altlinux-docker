@@ -1,20 +1,22 @@
 FROM library/alt:sisyphus
-RUN apt-get update \
+RUN rm -rf /etc/apt/sources.list.d/* /etc/apt/sources.list \
+    && echo \
+      'rpm [alt] http://mirror.yandex.ru/altlinux Sisyphus/x86_64 classic' >> \
+      /etc/apt/sources.list \
+    && echo \
+      'rpm [alt] http://mirror.yandex.ru/altlinux Sisyphus/noarch classic' >> \
+      /etc/apt/sources.list \
+    && apt-get update \
     && apt-get dist-upgrade -y \
     && apt-get install -y systemd \
     && systemctl mask var-run.mount \
     && rm -rfv /var/run \
     && ln -sr ../run /var \
-    && apt-get install -y glibc-locales su sudo apt-repo systemd docker-ce \
+    && apt-get install -y glibc-locales su sudo docker-ce apt-repo \
     && apt-get install -y systemd-sysvinit \
     && apt-get clean \
     && find /var/lib/apt/lists/ -type f -exec rm "{}" \; \
     && rm -rf /var/cache/apt/*.bin \
-    && apt-repo rm all \
-    && apt-repo add \
-        'rpm [alt] http://mirror.yandex.ru/altlinux Sisyphus/x86_64 classic' \
-    && apt-repo add \
-        'rpm [alt] http://mirror.yandex.ru/altlinux Sisyphus/noarch classic' \
     && control sudo public
 
 VOLUME [ "/run" ]
