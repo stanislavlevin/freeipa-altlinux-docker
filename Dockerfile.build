@@ -13,7 +13,7 @@ RUN rm -rf /etc/apt/sources.list.d/* /etc/apt/sources.list \
     && rm -rfv /var/run \
     && ln -sr ../run /var \
     && apt-get install -y glibc-locales su sudo docker-ce apt-repo \
-    && apt-get install -y systemd-sysvinit \
+    && echo 'Yes, do as I say!' | apt-get install --force-yes systemd-sysvinit \
     && apt-get clean \
     && find /var/lib/apt/lists/ -type f -exec rm "{}" \; \
     && rm -rf /var/cache/apt/*.bin \

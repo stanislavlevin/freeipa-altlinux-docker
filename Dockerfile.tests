@@ -10,7 +10,7 @@ RUN rm -rf /etc/apt/sources.list.d/* /etc/apt/sources.list \
     && apt-get dist-upgrade -y \
     && apt-get install -y glibc-locales su sudo systemd chrony apt-repo \
         docker-ce \
-    && apt-get install -y systemd-sysvinit \
+    && echo 'Yes, do as I say!' | apt-get install --force-yes systemd-sysvinit \
     && apt-get clean \
     && find /var/lib/apt/lists/ -type f -exec rm "{}" \; \
     && rm -rf /var/cache/apt/*.bin \
