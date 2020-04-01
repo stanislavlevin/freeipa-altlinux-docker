@@ -4,6 +4,9 @@ RUN rm -rf /etc/apt/sources.list.d/* /etc/apt/sources.list \
       'rpm [alt] http://download.basealt.ru/pub/distributions/ALTLinux Sisyphus/x86_64 classic' >> \
       /etc/apt/sources.list \
     && echo \
+      'rpm [alt] http://download.basealt.ru/pub/distributions/ALTLinux Sisyphus/x86_64 debuginfo' >> \
+      /etc/apt/sources.list \
+    && echo \
       'rpm [alt] http://download.basealt.ru/pub/distributions/ALTLinux Sisyphus/noarch classic' >> \
       /etc/apt/sources.list \
     && apt-get update \
