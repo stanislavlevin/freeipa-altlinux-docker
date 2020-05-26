@@ -3,11 +3,11 @@ schedules:
   displayName: Weekly build
   branches:
     include:
-    - sisyphus
+    - p9
   always: true
 
 trigger:
-- sisyphus
+- p9
 
 jobs:
 - job: Create
@@ -31,4 +31,4 @@ jobs:
       Dockerfile:
         Dockerfile.$(TARGET)
       tags:
-        sisyphus
+        p9

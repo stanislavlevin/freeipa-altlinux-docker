@@ -1,13 +1,13 @@
-FROM library/alt:sisyphus
+FROM library/alt:p9
 RUN rm -rf /etc/apt/sources.list.d/* /etc/apt/sources.list \
     && echo \
-      'rpm [alt] http://download.basealt.ru/pub/distributions/ALTLinux Sisyphus/x86_64 classic' >> \
+      'rpm [p9] http://download.basealt.ru/pub/distributions/ALTLinux p9/branch/x86_64 classic' >> \
       /etc/apt/sources.list \
     && echo \
-      'rpm [alt] http://download.basealt.ru/pub/distributions/ALTLinux Sisyphus/x86_64 debuginfo' >> \
+      'rpm [p9] http://download.basealt.ru/pub/distributions/ALTLinux p9/branch/x86_64 debuginfo' >> \
       /etc/apt/sources.list \
     && echo \
-      'rpm [alt] http://download.basealt.ru/pub/distributions/ALTLinux Sisyphus/noarch classic' >> \
+      'rpm [p9] http://download.basealt.ru/pub/distributions/ALTLinux p9/branch/noarch classic' >> \
       /etc/apt/sources.list \
     && apt-get update \
     && apt-get dist-upgrade -y \
