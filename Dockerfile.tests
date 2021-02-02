@@ -11,9 +11,16 @@ RUN rm -rf /etc/apt/sources.list.d/* /etc/apt/sources.list \
     && echo \
       'rpm [alt] http://download.basealt.ru/pub/distributions/ALTLinux Sisyphus/noarch classic' >> \
       /etc/apt/sources.list \
+    && sed -i 's/^%_install_langs .*/# &/g' /etc/rpm/macros \
+    && echo '%_install_langs en_US:fr:C' >> /etc/rpm/macros \
+    && rm -rf /usr/lib/locale/ \
+    && find /usr/share/locale -mindepth 1 -maxdepth 1 \
+        ! -name en_GB \
+        -exec rm -rv {} \; \
     && apt-get update \
     && apt-get dist-upgrade -y \
-    && apt-get install -y glibc-locales su sudo systemd chrony apt-repo \
+    && apt-get install -y glibc-locales \
+    && apt-get install -y su sudo systemd chrony apt-repo \
         docker-ce \
     && echo 'Yes, do as I say!' | apt-get install --force-yes systemd-sysvinit \
     && apt-get clean \
