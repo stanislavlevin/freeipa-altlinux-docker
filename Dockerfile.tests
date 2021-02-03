@@ -1,4 +1,6 @@
 FROM library/alt:p9
+ENV container=docker
+
 RUN rm -rf /etc/apt/sources.list.d/* /etc/apt/sources.list \
     && echo \
       'rpm [p9] http://download.basealt.ru/pub/distributions/ALTLinux p9/branch/x86_64 classic' >> \
