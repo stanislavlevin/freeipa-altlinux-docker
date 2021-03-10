@@ -26,7 +26,8 @@ RUN rm -rf /etc/apt/sources.list.d/* /etc/apt/sources.list \
     && apt-get clean \
     && find /var/lib/apt/lists/ -type f -exec rm "{}" \; \
     && rm -rf /var/cache/apt/*.bin \
-    && control sudo public
+    && control sudo public \
+    && control sudowheel enabled
 
 VOLUME [ "/run" ]
 ENTRYPOINT [ "/sbin/init" ]

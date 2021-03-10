@@ -27,6 +27,7 @@ RUN rm -rf /etc/apt/sources.list.d/* /etc/apt/sources.list \
     && find /var/lib/apt/lists/ -type f -exec rm "{}" \; \
     && rm -rf /var/cache/apt/*.bin \
     && control sudo public \
+    && control sudowheel enabled \
     && systemctl enable chronyd \
     && sed -i 's/mesg n/mesg n >\/dev\/null 2>\&1/g' /root/.bash_profile
 
