@@ -3,13 +3,13 @@ ENV container=docker
 
 RUN rm -rf /etc/apt/sources.list.d/* /etc/apt/sources.list \
     && echo \
-      'rpm [p9] http://download.basealt.ru/pub/distributions/ALTLinux p9/branch/x86_64 classic' >> \
+      'rpm [p9] http://mirror.yandex.ru/altlinux p9/branch/x86_64 classic' >> \
       /etc/apt/sources.list \
     && echo \
-      'rpm [p9] http://download.basealt.ru/pub/distributions/ALTLinux p9/branch/x86_64 debuginfo' >> \
+      'rpm [p9] http://mirror.yandex.ru/altlinux p9/branch/x86_64 debuginfo' >> \
       /etc/apt/sources.list \
     && echo \
-      'rpm [p9] http://download.basealt.ru/pub/distributions/ALTLinux p9/branch/noarch classic' >> \
+      'rpm [p9] http://mirror.yandex.ru/altlinux p9/branch/noarch classic' >> \
       /etc/apt/sources.list \
     && sed -i 's/^%_install_langs .*/# &/g' /etc/rpm/macros \
     && echo '%_install_langs en_US:fr:C' >> /etc/rpm/macros \
