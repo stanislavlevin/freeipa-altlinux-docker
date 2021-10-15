@@ -1,15 +1,15 @@
-FROM library/alt:sisyphus
+FROM library/alt:p10
 ENV container=docker
 
 RUN rm -rf /etc/apt/sources.list.d/* /etc/apt/sources.list \
     && echo \
-      'rpm [alt] http://download.basealt.ru/pub/distributions/ALTLinux Sisyphus/x86_64 classic' >> \
+      'rpm [p10] http://download.basealt.ru/pub/distributions/ALTLinux p10/branch/x86_64 classic' >> \
       /etc/apt/sources.list \
     && echo \
-      'rpm [alt] http://download.basealt.ru/pub/distributions/ALTLinux Sisyphus/x86_64 debuginfo' >> \
+      'rpm [p10] http://download.basealt.ru/pub/distributions/ALTLinux p10/branch/x86_64 debuginfo' >> \
       /etc/apt/sources.list \
     && echo \
-      'rpm [alt] http://download.basealt.ru/pub/distributions/ALTLinux Sisyphus/noarch classic' >> \
+      'rpm [p10] http://download.basealt.ru/pub/distributions/ALTLinux p10/branch/noarch classic' >> \
       /etc/apt/sources.list \
     && sed -i 's/^%_install_langs .*/# &/g' /etc/rpm/macros \
     && echo '%_install_langs en_US:fr:C' >> /etc/rpm/macros \
