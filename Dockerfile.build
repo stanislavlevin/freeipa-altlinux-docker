@@ -16,6 +16,7 @@ RUN rm -rf /etc/apt/sources.list.d/* /etc/apt/sources.list \
         -exec rm -rv {} \; \
     && apt-get update \
     && apt-get dist-upgrade -y \
+    && apt-get install -y branding-xalt-kworkstation-release \
     && apt-get install -y glibc-locales \
     && apt-get install -y systemd \
     && systemctl mask var-run.mount \
