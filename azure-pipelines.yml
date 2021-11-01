@@ -11,6 +11,8 @@ trigger:
 
 jobs:
 - job: Create
+  pool:
+    vmImage: 'ubuntu-20.04'
   strategy:
     matrix:
       Build_Image:
