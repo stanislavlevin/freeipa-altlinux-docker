@@ -9,11 +9,10 @@ RUN rm -rf /etc/apt/sources.list.d/* /etc/apt/sources.list \
       'rpm [p10] http://download.basealt.ru/pub/distributions/ALTLinux p10/branch/noarch classic' >> \
       /etc/apt/sources.list \
     && sed -i 's/^%_install_langs .*/# &/g' /etc/rpm/macros \
-    && echo '%_install_langs en_US:fr:C' >> /etc/rpm/macros \
+    && echo '%_install_langs en_US:fr_FR:C:' >> /etc/rpm/macros \
     && rm -rf /usr/lib/locale/ \
-    && find /usr/share/locale -mindepth 1 -maxdepth 1 \
-        ! -name en_GB \
-        -exec rm -rv {} \; \
+    && rm -rf /usr/share/locale/ \
+    && mkdir -p /usr/share/locale/en_GB/LC_MESSAGES/ \
     && apt-get update \
     && apt-get dist-upgrade -y \
     && apt-get install -y branding-xalt-kworkstation-release \
