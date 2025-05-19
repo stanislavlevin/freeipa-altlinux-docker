@@ -12,7 +12,7 @@ trigger:
 jobs:
 - job: Create
   pool:
-    vmImage: 'ubuntu-20.04'
+    vmImage: 'ubuntu-24.04'
   strategy:
     matrix:
       Build_Image:
