@@ -10,7 +10,10 @@ RUN rm -rf /etc/apt/sources.list.d/* /etc/apt/sources.list \
       /etc/apt/sources.list \
     && sed -i 's/^%_install_langs .*/# &/g' /etc/rpm/macros \
     && echo '%_install_langs en_US:fr_FR:C:' >> /etc/rpm/macros \
+    && mv /usr/lib/locale/C.utf8/ /root/ \
     && rm -rf /usr/lib/locale/ \
+    && mkdir -p /usr/lib/locale \
+    && mv /root/C.utf8 /usr/lib/locale/ \
     && rm -rf /usr/share/locale/ \
     && mkdir -p /usr/share/locale/en_GB/LC_MESSAGES/ \
     && apt-get update \
