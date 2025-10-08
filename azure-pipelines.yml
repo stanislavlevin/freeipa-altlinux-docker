@@ -4,16 +4,8 @@ variables:
   DISTRO_BRANCH_REPO: 'rpm [alt] http://download.basealt.ru/pub/distributions/ALTLinux Sisyphus'
   DOCKER_IMAGE: ${{ format('library/alt:{0}', variables.DISTRO_BRANCH) }}
 
-schedules:
-- cron: "0 23 * * 0"
-  displayName: Weekly build
-  branches:
-    include:
-    - $(DISTRO_BRANCH)
-  always: true
-
 trigger:
-- sisyphus
+- none
 
 jobs:
 - job: build_and_publish_docker_image
