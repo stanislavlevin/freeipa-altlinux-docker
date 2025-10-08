@@ -1,13 +1,10 @@
-FROM library/alt:sisyphus
+FROM docker_image
 ENV container=docker
+ARG DISTRO_BRANCH_REPO
 
 RUN rm -rf /etc/apt/sources.list.d/* /etc/apt/sources.list \
-    && echo \
-      'rpm [alt] http://download.basealt.ru/pub/distributions/ALTLinux Sisyphus/x86_64 classic' >> \
-      /etc/apt/sources.list \
-    && echo \
-      'rpm [alt] http://download.basealt.ru/pub/distributions/ALTLinux Sisyphus/noarch classic' >> \
-      /etc/apt/sources.list \
+    && echo "$DISTRO_BRANCH_REPO/x86_64 classic" >> /etc/apt/sources.list \
+    && echo "$DISTRO_BRANCH_REPO/noarch classic" >> /etc/apt/sources.list \
     && sed -i 's/^%_install_langs .*/# &/g' /etc/rpm/macros \
     && echo '%_install_langs en_US:fr_FR:C:' >> /etc/rpm/macros \
     && mv /usr/lib/locale/C.utf8/ /root/ \

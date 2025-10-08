@@ -1,18 +1,25 @@
+variables:
+  VM_IMAGE: 'ubuntu-24.04'
+  DISTRO_BRANCH: sisyphus
+  DISTRO_BRANCH_REPO: 'rpm [alt] http://download.basealt.ru/pub/distributions/ALTLinux Sisyphus'
+  DOCKER_IMAGE: ${{ format('library/alt:{0}', variables.DISTRO_BRANCH) }}
+
 schedules:
 - cron: "0 23 * * 0"
   displayName: Weekly build
   branches:
     include:
-    - sisyphus
+    - $(DISTRO_BRANCH)
   always: true
 
 trigger:
 - sisyphus
 
 jobs:
-- job: Create
+- job: build_and_publish_docker_image
+  displayName: Build and publish docker image
   pool:
-    vmImage: 'ubuntu-24.04'
+    vmImage: $(VM_IMAGE)
   strategy:
     matrix:
       Build_Image:
@@ -25,12 +32,24 @@ jobs:
     inputs:
       command: login
       containerRegistry: dockerRegistryServiceConnection1
+
   - task: Docker@2
-    displayName: Build and Push
+    displayName: Build docker image
     inputs:
-      command: buildAndPush
+      command: build
       repository: stanislavlevin/freeipa-$(TARGET)-altlinux
       Dockerfile:
         Dockerfile.$(TARGET)
       tags:
-        sisyphus
+        $(DISTRO_BRANCH)
+      arguments: >
+        --build-arg DISTRO_BRANCH_REPO="$(DISTRO_BRANCH_REPO)"
+        --build-context docker_image="docker-image://$(DOCKER_IMAGE)"
+
+  - task: Docker@2
+    displayName: Push docker image to registry
+    inputs:
+      command: push
+      repository: stanislavlevin/freeipa-$(TARGET)-altlinux
+      tags:
+        $(DISTRO_BRANCH)
