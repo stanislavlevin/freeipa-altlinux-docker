@@ -1,7 +1,7 @@
 variables:
   VM_IMAGE: 'ubuntu-24.04'
-  DISTRO_BRANCH: sisyphus
-  DISTRO_BRANCH_REPO: 'rpm [alt] http://download.basealt.ru/pub/distributions/ALTLinux Sisyphus'
+  DISTRO_BRANCH: p11
+  DISTRO_BRANCH_REPO: 'rpm [p11] http://download.basealt.ru/pub/distributions/ALTLinux p11/branch'
   DOCKER_IMAGE: ${{ format('library/alt:{0}', variables.DISTRO_BRANCH) }}
 
 trigger:
